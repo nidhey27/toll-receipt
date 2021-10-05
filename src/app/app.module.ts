@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReceiptFormComponent } from './receipt-form/receipt-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { NgxElectronModule } from 'ngx-electron';
 
 @NgModule({
   declarations: [
@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxElectronModule
   ],
   providers: [],
   bootstrap: [AppComponent]

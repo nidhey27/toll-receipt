@@ -1,4 +1,7 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
+const path = require("path");
+
+const fs = require('fs');
 
 let win;
 
@@ -13,7 +16,9 @@ function createWindow () {
         nodeIntegration: true,
         nodeIntegrationInWorker: true,
         worldSafeExecuteJavaScript: true, 
-        contextIsolation: true
+        contextIsolation: false,
+        enableRemoteModule: true,
+        preload: path.join(__dirname, "preload.js")
       }
   })
 
@@ -31,6 +36,23 @@ function createWindow () {
     win = null
   })
 }
+
+function yo () {
+  // Create the browser window.
+  console.log('yo');
+}
+
+ipcMain.on('add-to-json', (event, args) => { // doStuff
+  fs.readFile('data.json', function (err, data) {
+      var json = JSON.parse(data)
+      json.push(args)
+      
+      fs.writeFile("data.json", JSON.stringify(json), (err, data) => {
+        if(err) console.log('error', err);
+      })
+  })
+});
+
 
 // Create window on electron intialization
 app.on('ready', createWindow)
