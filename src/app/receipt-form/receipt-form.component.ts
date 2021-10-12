@@ -73,6 +73,17 @@ export class ReceiptFormComponent implements OnInit {
       
   }
 
+  async export(){
+    // ipcMain.emit('event-aka-channel-name1', data);
+    // this._electron.ipcRenderer.send('event-aka-channel-name1', data);
+    console.log(this._electron.isElectronApp);
+    if(this._electron.isElectronApp)
+      this._electron.ipcRenderer.send('export-to-excel', '');
+    else
+      console.log('else');
+      
+  }
+
   generatePDF() {
     let docDefinition = {
       pageOrientation: 'portrait',

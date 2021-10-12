@@ -1,0 +1,22 @@
+{
+  "receipts": [
+    {
+      "vehicle_number": "hehe",
+      "type": "60",
+      "amount": "60",
+      "id": 1633861988529
+    },
+    {
+      "vehicle_number": "yoyo",
+      "type": "390",
+      "amount": "390",
+      "id": 1633862012759
+    },
+    {
+      "vehicle_number": "yoyoyoyo",
+      "type": "220",
+      "amount": "220",
+      "id": 1633862918678
+    }
+  ]
+}
