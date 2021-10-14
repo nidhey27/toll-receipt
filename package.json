@@ -23,11 +23,20 @@
     "@angular/platform-browser": "~11.0.5",
     "@angular/platform-browser-dynamic": "~11.0.5",
     "@angular/router": "~11.0.5",
+    "@electron/remote": "^2.0.1",
     "cors": "^2.8.5",
+    "electron-db": "^0.15.7",
     "excel4node": "^1.7.2",
+    "exceljs": "^4.3.0",
     "express": "^4.17.1",
+    "file-saver": "^2.0.5",
+    "fs": "0.0.1-security",
+    "fs-web": "^1.0.1",
+    "ngx-electron": "^2.2.0",
+    "pdfmake": "^0.2.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "xlsx": "^0.17.2",
     "xlsx-populate": "^1.21.0",
     "zone.js": "~0.10.2"
   },
@@ -36,9 +45,10 @@
     "@angular/cli": "~11.0.5",
     "@angular/compiler-cli": "~11.0.5",
     "@types/jasmine": "~3.6.0",
-    "@types/node": "^12.11.1",
+    "@types/node": "^15.14.0",
     "codelyzer": "^6.0.0",
-    "electron": "^15.1.0",
+    "electron": "^15.1.1",
+    "electron-packager": "^15.4.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.1.0",
@@ -55,5 +65,14 @@
     "*.js",
     "build",
     "node_modules"
-  ]
+  ],
+  "browser": {
+    "http": false,
+    "https": false,
+    "net": false,
+    "path": false,
+    "stream": false,
+    "tls": false,
+    "fs": false
+  }
 }

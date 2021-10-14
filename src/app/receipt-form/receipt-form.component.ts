@@ -5,6 +5,17 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
+import { HttpClient } from '@angular/common/http';
+
+import * as XLSX from "xlsx"
+import * as fs from 'fs';
+import * as path from 'path';
+
+import { saveAs } from 'file-saver';
+import * as data from '../../assets/data.json';
+import { ElectronService } from 'ngx-electron';
+import { ipcMain } from 'electron';
+
 @Component({
   selector: 'app-receipt-form',
   templateUrl: './receipt-form.component.html',
@@ -16,8 +27,15 @@ export class ReceiptFormComponent implements OnInit {
   result: any;
   successMessage = ''
   errorMessage = ''
+  workbook: any;
+  
+  reciepts: any = (data as any).default
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private _electron: ElectronService
+    ) {      
+  }
 
   ngOnInit(): void {
     window.scrollTo(0, 0)
@@ -30,6 +48,7 @@ export class ReceiptFormComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.recepitForm.value);
+    this.addEntry(this.recepitForm.value);
     this.generatePDF()
   }
 
@@ -41,6 +60,28 @@ export class ReceiptFormComponent implements OnInit {
       amount
     });
 
+  }
+
+  async addEntry(data){
+    // ipcMain.emit('event-aka-channel-name1', data);
+    // this._electron.ipcRenderer.send('event-aka-channel-name1', data);
+    console.log(this._electron.isElectronApp);
+    if(this._electron.isElectronApp)
+      this._electron.ipcRenderer.send('add-to-json', data);
+    else
+      console.log('else');
+      
+  }
+
+  async export(){
+    // ipcMain.emit('event-aka-channel-name1', data);
+    // this._electron.ipcRenderer.send('event-aka-channel-name1', data);
+    console.log(this._electron.isElectronApp);
+    if(this._electron.isElectronApp)
+      this._electron.ipcRenderer.send('export-to-excel', '');
+    else
+      console.log('else');
+      
   }
 
   generatePDF() {
